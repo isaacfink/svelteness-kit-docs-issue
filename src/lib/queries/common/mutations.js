@@ -1,0 +1,40 @@
+// create order
+export const CREATE_ORDER = gql`
+mutation(
+    $card:String!
+    $name:String!
+    $email:String!
+    $phone:String!
+    $delivery:Boolean!
+    $gift:Boolean!
+    $time:DateTime
+    $giftFrom:String
+    $giftTo:String
+    $giftMessage:String
+    $packages:[order_package_input]!
+){
+    createOrder(
+      card:$card
+      name:$name
+      email:$email
+      phone:$phone
+      isDelivery:$delivery
+      isGift:$gift
+      giftFrom:$giftFrom
+      giftTo:$giftTo
+      giftMessage:$giftMessage
+      packages:$packages
+    )
+    {
+      response{
+        success
+        message
+        order{
+          id
+          paid
+          scheduledTime
+        }
+      }
+    }
+  }
+`

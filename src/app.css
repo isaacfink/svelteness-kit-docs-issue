@@ -1,0 +1,129 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    @media screen and (max-width: 350px){
+		html{
+			font-size: 12px;
+		}
+	}
+    @media screen and (min-width:768px) and (max-width: 1930px){
+		html{
+			font-size: 14px;
+		}
+	}
+}
+@layer utilities{
+    /* global styles */
+    *{
+        font-family:bn_bergen_stmedium;
+        touch-action: manipulation;
+    }
+    
+    *.font-light{
+        font-family:bn_bergen_stlight;
+    }
+    .background-blur{
+      backdrop-filter: blur(100px);
+    }
+
+    /* delivery type styles */
+    .delivery-card.selected{
+      @apply bg-purple-primary rounded-3xl shadow-xl text-white;
+      flex-basis: 100%;
+    }
+    .delivery-card{
+        @apply bg-white px-9 py-6 md:pb-10 rounded-3xl shadow-xl text-purple-primary cursor-pointer transition duration-75 ease-linear;
+        flex-basis: 100%;
+    }
+    
+    .delivery-card:hover{
+        @apply transform scale-105 transition duration-200 ease-linear shadow-2xl;
+    }
+    /* nav bar styles */
+    .link{
+        @apply lg:text-xl hover:text-purple-light transition duration-150 text-white uppercase tracking-widest
+    }
+    .active-link{
+        @apply text-gold-primary lg:text-xl hover:text-purple-light transition duration-150 uppercase tracking-widest
+    }
+
+    /* custom scroll styles */
+    .custom-scroll::-webkit-scrollbar{
+          width:3px; 
+    }
+    
+    /* Track */
+    .custom-scroll::-webkit-scrollbar-track {
+        @apply bg-gold-light;
+    }
+    
+    /* Handle */
+    .custom-scroll::-webkit-scrollbar-thumb{
+        @apply bg-gold-primary;
+    }
+    
+    /* Handle on hover */
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+        @apply bg-purple-primary;
+        width:8px;
+    }
+    
+    /* firefox */
+    .custom-scroll{
+        scrollbar-color:#ECB28B #FBF0E8;
+        scrollbar-width:thin;
+    }
+
+    /* faq styles */
+    .q{
+        @apply uppercase text-purple-primary text-2xl tracking-widest mb-5
+    }
+    .a{
+        @apply text-xl mb-10 tracking-wide border-b border-dashed border-gold-primary pb-5;
+        font-family:bn_bergen_stlight;
+    }
+
+    .a a{
+        @apply underline hover:text-purple-primary;
+    }
+
+    /* choose time styles */
+    .day{
+        @apply flex justify-center items-center text-purple-primary bg-gold-light rounded-md px-5 leading-10 w-full;
+    }
+
+    .time{
+        @apply rounded-lg bg-purple-lighter cursor-pointer font-bold text-sm mr-3 text-purple-primary px-5 py-2
+    }
+
+    @media (max-width: 640px){
+    .day{
+      @apply px-0 leading-7 text-xs;
+    }
+  }
+
+  .day.disabled{
+      @apply flex justify-center items-center text-purple-light bg-white cursor-not-allowed;
+  }
+
+  .day.disabled{
+      @apply flex justify-center items-center text-purple-light bg-white cursor-not-allowed;
+  }
+
+  .day.selected,
+  .time.selected{
+      @apply bg-purple-primary rounded-lg text-white transition-all duration-150;
+  }
+
+  .day.today{
+    @apply border border-purple-primary
+  }
+}
+
+iframe{
+    height:60px !important;
+    width: 100% !important;
+}

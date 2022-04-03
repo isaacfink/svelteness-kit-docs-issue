@@ -1,0 +1,53 @@
+// create category
+export const CREATE_CATEGORY = `
+mutation(
+  $name:String!
+  $description:String!
+  $sideBarText:String!
+  $type:categoryType
+  $minimumPrice:Decimal
+  $image:Upload
+  $icon:Upload
+){
+  createCategory(input:{
+    name:$name
+    description:$description
+    sideBarText:$sideBarText
+    type:$type
+    minimumPrice:$minimumPrice
+    image:$image
+    icon:$icon
+  }){
+    category{
+      id
+    }
+  }
+}
+`
+
+export const UPDATE_CATEGORY = `
+mutation(
+  $id:ID!
+  $name:String!
+  $description:String!
+  $sideBarText:String!
+  $type:categoryType
+  $minimumPrice:Decimal
+  $image:Upload
+  $icon:Upload
+){
+  updateCategory(id:$id,input:{
+    name:$name
+    description:$description
+    sideBarText:$sideBarText
+    type:$type
+    minimumPrice:$minimumPrice
+    image:$image
+    icon:$icon
+  }){
+    category{
+      id
+    }
+  }
+}
+`

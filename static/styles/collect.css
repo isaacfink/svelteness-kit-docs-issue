@@ -1,0 +1,86 @@
+/* fonts */
+@font-face {
+    font-family: 'bn_bergen_stmedium';
+    src: url('http://127.0.0.1:3000/fonts/BnbergenstMediumWebfont.woff') format('woff2'),
+        url('http://127.0.0.1:3000/fonts/BnbergenstMediumWebfont.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+  }
+
+/* resets */
+*,
+*:before,
+*:after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'bn_bergen_stmedium';
+}
+
+/* set correct font sizes
+@media screen and (device-max-width: 350px){
+    html{
+        font-size: 12px;
+    }
+}
+@media screen and (device-min-width:768px) and (device-max-width: 1930px){
+    html{
+        font-size: 14px;
+    }
+}
+
+html{
+    font-size: 14px;
+} */
+
+input#ccnumber,
+input#ccexp,
+input#cardname,
+input#cvv{
+    font-size: 1.125rem/* 18px */;
+    /* line-height: 1.75rem;  */
+    background-color: rgba(249, 250, 251, 1);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    flex-grow: 1;
+    border: 2px solid rgba(229, 231, 235, 1);
+    border-radius: 0.5rem/* 8px */;
+    margin: 0px;
+    margin-right: 1rem/* 16px */;
+    width: 100%;
+    padding-top: 0.75rem/* 12px */;
+    padding-bottom: 0.75rem/* 12px */;
+    padding-left: 1rem/* 16px */;
+    padding-right: 1rem/* 16px */;
+    appearance: none;
+}
+
+input#ccnumber:focus,
+input#cardname:focus,
+input#ccexp:focus,
+input#cvv:focus {
+    border: 2px solid rgba(102, 40, 116, 1);
+    outline: none;
+}
+
+#cvv:not(:first-child),
+#ccnumber:not(:first-child),
+#cardname:not(:first-child),
+#ccexp:not(:first-child){
+    display:none;
+}
+
+input#cvv{
+    flex-shrink: 1;
+}
+input#ccexp{
+    flex-grow: 1;
+}
+
+@media (min-width: 768px) {
+    input#ccexp,
+    input#cvv {
+        flex: 1 1 0%;
+    }
+}
