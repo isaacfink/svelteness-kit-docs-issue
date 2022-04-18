@@ -33,6 +33,9 @@
             "type":category.type,
             "minimumPrice":category.minimumPrice,
         }).then(res => {
+            if (res?.error?.message == "[GraphQL] Unauthenticated!") {
+                goto('/accounts/login?next=/admin/categories/new')
+            }
             goto(`/admin/categories/${res.data.createCategory.category.id}`)
         })
     }

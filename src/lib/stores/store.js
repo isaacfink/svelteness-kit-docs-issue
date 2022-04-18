@@ -25,4 +25,6 @@ export const selectedProduct = new writable()
 
 export const cart = writable( browser && JSON.parse(localStorage.getItem('cart')) || {packages:[]})
 
+export const reexecute = new writable(false)
+
 cart.subscribe(data => browser && localStorage.setItem('cart', JSON.stringify(data)))

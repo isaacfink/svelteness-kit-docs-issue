@@ -37,7 +37,7 @@
             <div class="mt-1">
               <input bind:value={schedule.sundayCutoff} id="min" type="number" name="sundayCutoff" class="shadow-sm focus:ring-purple-primary focus:border-purple-primary block w-full sm:text-sm border border-gray-300 rounded-md">
             </div>
-            <p class="mt-2 text-sm text-gray-500">Minimum amount per order, thid will only apply for orders with type of minimum per order</p>
+            <p class="mt-2 text-sm text-gray-500">cutoff time</p>
           </div>
   
           <!-- monday -->
@@ -55,7 +55,7 @@
             <div class="mt-1">
               <input bind:value={schedule.mondayCutoff} id="min" type="number" name="mondayCutoff" class="shadow-sm focus:ring-purple-primary focus:border-purple-primary block w-full sm:text-sm border border-gray-300 rounded-md">
             </div>
-            <p class="mt-2 text-sm text-gray-500">Minimum amount per order, thid will only apply for orders with type of minimum per order</p>
+            <p class="mt-2 text-sm text-gray-500">cutoff time</p>
           </div>
   
           <!-- tuesday -->
@@ -73,7 +73,7 @@
             <div class="mt-1">
               <input bind:value={schedule.tuesdayCutoff} id="min" type="number" name="tuesdayCutoff" class="shadow-sm focus:ring-purple-primary focus:border-purple-primary block w-full sm:text-sm border border-gray-300 rounded-md">
             </div>
-            <p class="mt-2 text-sm text-gray-500">Minimum amount per order, thid will only apply for orders with type of minimum per order</p>
+            <p class="mt-2 text-sm text-gray-500">cutoff time</p>
           </div>
   
           <!-- wednesday -->
@@ -91,7 +91,7 @@
             <div class="mt-1">
               <input bind:value={schedule.wednesdayCutoff} id="min" type="number" name="wednesdayCutoff" class="shadow-sm focus:ring-purple-primary focus:border-purple-primary block w-full sm:text-sm border border-gray-300 rounded-md">
             </div>
-            <p class="mt-2 text-sm text-gray-500">Minimum amount per order, thid will only apply for orders with type of minimum per order</p>
+            <p class="mt-2 text-sm text-gray-500">cutoff time</p>
           </div>
   
           <!-- thursday -->
@@ -109,7 +109,7 @@
             <div class="mt-1">
               <input bind:value={schedule.thursdayCutoff} id="min" type="number" name="thursdayCutoff" class="shadow-sm focus:ring-purple-primary focus:border-purple-primary block w-full sm:text-sm border border-gray-300 rounded-md">
             </div>
-            <p class="mt-2 text-sm text-gray-500">Minimum amount per order, thid will only apply for orders with type of minimum per order</p>
+            <p class="mt-2 text-sm text-gray-500">cutoff time</p>
           </div>
   
           <!-- friday -->
@@ -127,7 +127,7 @@
             <div class="mt-1">
               <input bind:value={schedule.fridayCutoff} id="min" type="number" name="fridayCutoff" class="shadow-sm focus:ring-purple-primary focus:border-purple-primary block w-full sm:text-sm border border-gray-300 rounded-md">
             </div>
-            <p class="mt-2 text-sm text-gray-500">Minimum amount per order, thid will only apply for orders with type of minimum per order</p>
+            <p class="mt-2 text-sm text-gray-500">cutoff time</p>
           </div>
   
           <!-- saturday -->
@@ -145,7 +145,7 @@
             <div class="mt-1">
               <input bind:value={schedule.saturdayCutoff} id="min" type="number" name="saturdayCutoff" class="shadow-sm focus:ring-purple-primary focus:border-purple-primary block w-full sm:text-sm border border-gray-300 rounded-md">
             </div>
-            <p class="mt-2 text-sm text-gray-500">Minimum amount per order, thid will only apply for orders with type of minimum per order</p>
+            <p class="mt-2 text-sm text-gray-500">cutoff time</p>
           </div>
           
         </div>

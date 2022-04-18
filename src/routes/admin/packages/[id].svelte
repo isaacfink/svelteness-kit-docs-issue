@@ -10,13 +10,15 @@
 
     import {page} from '$app/stores'
     import {PACKAGE} from '$lib/queries/admin/queries'
-    import {operationStore, query} from '@urql/svelte'
+    import {UPDATE_PACKAGE, REORDER_ITEMS} from "$lib/queries/admin/mutations";
+    import {operationStore, query, mutation} from '@urql/svelte'
     import Dropzone from "svelte-file-dropzone";
-    import ListItem from '$lib/components/admin/items/listItem.svelte';
-    import SortableList from '$lib/components/Sortable.svelte'
+    import DragDrop from "$lib/components/admin/packages/DragDropItems.svelte";
 
     let pkg = operationStore(PACKAGE, {id})
     query(pkg)
+
+    const reorderItems = mutation({query:REORDER_ITEMS})
 
     $: if($page){
         pkg.variables = {
@@ -27,12 +29,57 @@
 
     let selectedMenu = 'info'
 
-    function sortItems(ev){
-        console.log(ev)
+    let deletedImages = []
+    function handleFilesSelect(){
+      
+    }
+
+     // generate list for sortable
+     let sortableList = []
+    pkg.subscribe(res => {
+      let tempList = []
+      res.data?.package?.items.edges?.forEach(c => {
+        tempList.push({
+          
+          id: c.node.id,
+          name: c.node.name,
+          pk: c.node.pk,
+        })
+      })
+      sortableList = [...tempList]
+    })
+
+    function saveChanges(){
+      let tempOrder = []
+      sortableList.forEach(c => {
+        tempOrder.push(c.pk)
+      })
+      console.log(tempOrder)
+      reorderItems({order:tempOrder}).then(result => {
+
+      //   let mutationOptions = {
+      //     "id": id,
+      //     "name": $category.data.category.name,
+      //     "description": $category.data.category.description,
+      //     "sideBarText":$category.data.category.sideBarText,
+      //     "minimumPrice":$category.data.category.minimumPrice,
+      //     "type":$category.data.category.type,
+      //   }
+      //   if (image.length > 0){
+      //     mutationOptions.image = image[0]
+      //   }
+      //   if (icon.length > 0){
+      //     mutationOptions.icon = icon[0]
+      //   }
+      //   saveMutation(mutationOptions).then(() => {
+      //     $category.reexecute()
+      //   })
+      }
+      )
     }
 </script>
 
-<form class="space-y-8 divide-y divide-gray-200 pb-5">
+<form on:submit|preventDefault="{saveChanges}" class="space-y-8 divide-y divide-gray-200 pb-5">
     <div class="space-y-8 divide-y divide-gray-200">
       <div>
         <div>
@@ -131,17 +178,9 @@
           </div>
           
           {:else if selectedMenu == 'items'}
-            <p>items</p>
-            <SortableList
-              list={pkg.data.package?.items?.edges || []}
-              key="node"
-              on:sort={sortItems}
-              let:item
-            >
-              <ListItem
-                {item}
-              />
-              </SortableList>
+          <div class="h-6"></div>
+          <p class="mb-2">{$pkg.data.package.items.edges.length} packages</p>
+          <DragDrop bind:data={sortableList}/>
   
           {/if}
         {/if}

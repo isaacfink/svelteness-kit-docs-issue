@@ -1,18 +1,54 @@
-<script>
-  import {operationStore, query, mutation} from '@urql/svelte'
-  import {LOGIN} from '$lib/queries/admin'
+<script context="module">
+  export function load({ url }) {
+    const redirect = url.searchParams.get('next') || '/admin';
+    return {
+      props: {
+        redirect
+      }
+    };
+  }
+</script>
 
+<script>
+  export let redirect
+  import {mutation} from '@urql/svelte'
+  import {LOGIN} from '$lib/queries/admin/auth'
+  import {auth} from '$lib/stores/auth'
+  import {goto} from '$app/navigation'
+  import {page} from '$app/stores'
+import { onMount } from 'svelte';
   const loginMutation = mutation({query:LOGIN})
 
   async function login() {
-    loginMutation({username:email,password})
+    loginMutation({email,password})
     .then(result => {
-      console.log(result.data, result.error);
+      if (result.data.tokenAuth.success) {
+        console.log('success');
+        auth.update(current => {
+          return {
+            token: result.data.tokenAuth.token,
+            refreshToken: result.data.tokenAuth.refreshToken,
+            isAuthenticated: true,
+            expires: new Date().setDate(new Date().getDate() + 6)
+          }
+        })
+        goto(redirect)
+      }else{
+        console.log(result)
+        if (result.data.tokenAuth.errors.nonFieldErrors) {
+          error = result.data.tokenAuth.errors.nonFieldErrors[0].message
+        }
+      }
     })
   }
 
   let email
   let password
+  let error = ''
+
+  onMount(() => [
+    console.log($page),
+  ])
 </script>
 
 <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -41,7 +77,7 @@
   
           <div>
             <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-primary hover:bg-purple-darker focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-primary">Sign in</button>
-            <p>{email} {password} is not safe</p>
+            <p class="mt-3">{error}</p>
           </div>
         </form>
   

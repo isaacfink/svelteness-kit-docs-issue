@@ -1,7 +1,7 @@
 // all categories
 export const CATEGORIES = `
-query{
-  categories{
+query($search:String){
+  categories(name_Icontains:$search){
     edges{
       node{
         id
@@ -15,8 +15,8 @@ query{
 
 // all packages
 export const PACKAGES = `
-query{
-  packages{
+query($search:String){
+  packages(name_Icontains:$search){
     edges{
       node{
         pk
@@ -46,13 +46,17 @@ query{
     }
   }
 `
-
 // all products
 export const PRODUCTS = `
 query{
     products{
-      name
-      id
+      edges{
+        node{
+          id
+          name
+          pk
+        }
+      }
     }
   }
 `
@@ -107,6 +111,7 @@ query($id:ID!){
     minimumPrice
     image
     icon
+    type
     schedule{
       id
     }
@@ -175,6 +180,42 @@ query($id:ID!){
 // option details
 
 // schedule details
+export const SCHEDULE = `
+query($id:ID!){
+  schedule(id:$id){
+    name
+    id
+    sundayDelivery
+    sundayStart
+    sundayEnd
+    sundayCutoff
+    mondayDelivery
+    mondayStart
+    mondayEnd
+    mondayCutoff
+    tuesdayDelivery
+    tuesdayStart
+    tuesdayEnd
+    tuesdayCutoff
+    wednesdayDelivery
+    wednesdayStart
+    wednesdayEnd
+    wednesdayCutoff
+    thursdayDelivery
+    thursdayStart
+    thursdayEnd
+    thursdayCutoff
+    fridayDelivery
+    fridayStart
+    fridayEnd
+    fridayCutoff
+    saturdayDelivery
+    saturdayStart
+    saturdayEnd
+    saturdayCutoff
+  }
+}
+`
 
 // coupon detais
 
