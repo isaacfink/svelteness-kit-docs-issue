@@ -14,7 +14,7 @@
 		"@lottiefiles/svelte-lottie-player": "^0.2.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
-		"@svelteness/kit-docs": "^0.6.1",
+		"@svelteness/kit-docs": "^0.7.2",
 		"@tailwindcss/aspect-ratio": "^0.4.0",
 		"@tailwindcss/forms": "^0.4.0",
 		"@tailwindcss/typography": "^0.5.2",

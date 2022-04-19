@@ -1,7 +1,11 @@
 <script context="module">
   export const prerender = true;
-
-  export const load = createKitDocsLoader({ sidebar: '/docs' });
+  export const load = createKitDocsLoader({
+    sidebar: {
+      '/': null,
+      '/docs': '/docs',
+    },
+  });
 </script>
 
 <script>
@@ -10,57 +14,47 @@
   import '@svelteness/kit-docs/client/styles/fonts.css';
   import '@svelteness/kit-docs/client/styles/theme.css';
   import '@svelteness/kit-docs/client/styles/vars.css';
-
   import { page } from '$app/stores';
-
-  // import kitDocsLogo from '$lib/img/kit-docs-logo.svg?raw';
-  // import socialCardLarge from '$lib/img/social-card-large.jpg';
-
   import {
+    createKitDocsLoader,
     KitDocs,
     KitDocsLayout,
     Button,
     SocialLink,
-    createKitDocsLoader,
     createSidebarContext,
   } from '@svelteness/kit-docs';
-
   /** @type {import('@svelteness/kit-docs').MarkdownMeta} */
   export let meta;
-
-  /** @type {import('@svelteness/kit-docs').ResolvedSidebarConfig} */
+  /** @type {import('@svelteness/kit-docs').SidebarConfig} */
   export let sidebar;
-
   /** @type {import('@svelteness/kit-docs').NavbarConfig} */
-  const navbar = {
-    links: [{ title: 'Documentation', slug: '/docs', match: /\/docs/ }],
-  };
-
+  
   const { activeCategory } = createSidebarContext(sidebar);
 </script>
 
 <svelte:head>
-  <title>{$activeCategory}: {meta.title} | KitDocs</title>
-  <meta name="description" content={meta.description} />
-  <meta name="twitter:description" content={meta.description} />
-  <meta name="og:description" content={meta.description} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@mihar_22" />
-  <!-- <meta name="twitter:image" content={`https://kit-docs.svelteness.dev${socialCardLarge}`} /> -->
-  <meta name="twitter:creator" content="@mihar_22" />
-  <meta property="og:url" content={`https://kit-docs.svelteness.dev${$page.url.pathname}`} />
-  <meta property="og:type" content="article" />
-  <!-- <meta name="og:image" content={`https://kit-docs.svelteness.dev${socialCardLarge}`} /> -->
+  {#key $page.url.pathname}
+    <title>{$activeCategory}: {meta.title} | Svelte</title>
+    <meta name="description" content={meta.description} />
+    <meta name="twitter:description" content={meta.description} />
+    <meta name="og:description" content={meta.description} />
+  {/key}
 </svelte:head>
 
 <KitDocs {meta}>
-  <KitDocsLayout {navbar} {sidebar}>
+  <KitDocsLayout navbar={false} {sidebar}>
     <div slot="navbar-left">
       <div class="logo">
-        <Button href="#">
-          <!-- {@html kitDocsLogo} -->
+        <Button href="/">
+          <!-- {@html SvelteLogo} -->
         </Button>
       </div>
+    </div>
+
+    <div class="socials" slot="navbar-right-alt">
+      <SocialLink type="twitter" href="https://twitter.com/sveltejs" />
+      <SocialLink type="discord" href="https://discord.com/invite/yy75DKs" />
+      <SocialLink type="gitHub" href="https://github.com/sveltejs/svelte" />
     </div>
 
     <slot />
@@ -68,21 +62,26 @@
 </KitDocs>
 
 <style>
-  :global(:root) {
-    --kd-color-brand-rgb: 233, 127, 6;
-  }
-
-  :global(:root.dark) {
-    --kd-color-brand-rgb: 213, 149, 76;
-  }
-
   .logo :global(a) {
-    margin-left: 0.5rem;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
-
   .logo :global(svg) {
-    width: 26px;
+    height: 36px;
+    overflow: hidden;
+  }
+  .socials {
+    display: flex;
+    margin-right: -0.5rem;
+  }
+  .socials > :global(a) {
+    padding: 0 0.5rem;
+  }
+  :global(:root) {
+    --kd-color-brand-rgb: 209, 59, 18;
+  }
+  :global(:root.dark) {
+    --kd-color-brand-rgb: 227, 105, 70;
   }
 </style>
